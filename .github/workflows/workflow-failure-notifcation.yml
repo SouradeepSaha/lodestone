@@ -1,0 +1,17 @@
+name: Workflow Failure Notification
+on:
+  workflow_run:
+    workflows: ['*']
+    types: [completed]
+    branches: [main]
+
+jobs:
+  on-failure:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out'
+    steps:
+      - uses: Ilshidur/action-discord@master
+        with:
+          args: " ${{github.event.workflow_run.name}} - ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}} - <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.event.workflow_run.id}}|View Failure>"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
