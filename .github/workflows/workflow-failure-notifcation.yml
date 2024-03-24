@@ -16,10 +16,11 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{
-            "title": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}} has failed",
+            "title": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}}",
             "color": 16711680,
             "fields": [
               {"name": "Repository", "value": "[${{github.repository}}](${{github.server_url}}/${{github.repository}})", "inline": true},
               {"name": "Branch", "value": "${{github.event.workflow_run.head_branch}}", "inline": true},
+              {"name": "Conclusion", "value": "${{github.event.workflow_run.conclusion}}", "inline": true}
             ],
             "url": "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.event.workflow_run.id}}"}]'
