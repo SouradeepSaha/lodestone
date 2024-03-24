@@ -12,11 +12,15 @@ jobs:
     steps:
       - uses: Ilshidur/action-discord@master
         with:
-          args: " ${{github.event.workflow_run.name}} - ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}} - <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.event.workflow_run.id}}|View Failure>"
+          args: "Workflow Failuure Notification"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{
-            "title": "Workflow Failure Notification", "description": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}}",
+            "title": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}}" has failed,
+            "description": ,
             "color": 16711680,
-            "fields": [{"name": "Conclusion", "value": "${{github.event.workflow_run.conclusion}}"}],
+            "fields": [
+              {"name": "Repository", "value": "[${{github.repository}}](${{github.server_url}}/${{github.repository}})", "inline": true},
+              {"name": "Branch", "value": "${{github.event.workflow_run.head_branch}}", "inline": true},
+            ],
             "url": "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.event.workflow_run.id}}"}]'
