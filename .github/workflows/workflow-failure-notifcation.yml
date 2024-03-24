@@ -15,3 +15,8 @@ jobs:
           args: " ${{github.event.workflow_run.name}} - ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}} - <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.event.workflow_run.id}}|View Failure>"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[{
+            "title": "Workflow Failure Notification", "description": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}}",
+            "color": 16711680,
+            "fields": [{"name": "Conclusion", "value": "${{github.event.workflow_run.conclusion}}"}],
+            "url": "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.event.workflow_run.id}}"}]'
