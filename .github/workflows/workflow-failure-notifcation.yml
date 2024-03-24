@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: Ilshidur/action-discord@master
         with:
-          args: "Workflow Failuure Notification"
+          args: ""
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{
