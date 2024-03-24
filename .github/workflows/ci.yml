@@ -13,7 +13,6 @@ jobs:
 
   workspace-check:
     uses: ./.github/workflows/workspace-check.yml
-    needs: [sonarqube-scan]
     secrets: inherit
 
   core-cargo-test:
