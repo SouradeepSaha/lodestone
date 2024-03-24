@@ -12,12 +12,11 @@ jobs:
     steps:
       - uses: Ilshidur/action-discord@master
         with:
-          args: ""
+          args: "Workflow Failure Notification"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{
-            "title": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}}" has failed,
-            "description": ,
+            "title": "Workflow ${{github.event.workflow_run.name}} ${{github.event.workflow_run.conclusion}} on ${{github.event.workflow_run.head_branch}} has failed",
             "color": 16711680,
             "fields": [
               {"name": "Repository", "value": "[${{github.repository}}](${{github.server_url}}/${{github.repository}})", "inline": true},
